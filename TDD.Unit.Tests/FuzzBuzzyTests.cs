@@ -15,7 +15,7 @@ namespace TDD.Unit.Tests
             fizzy = new FizzBuzz();
         }
 
-        [TestCase("Fizzz", 3)]
+        [TestCase("Fizz", 3)]
         [TestCase("Fizz", 6)]
         [TestCase("Buzz", 5)]
         [TestCase("Buzz", 10)]
