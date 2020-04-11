@@ -16,8 +16,8 @@ namespace Lotto.Age.Units
             _lottoAge = new LottoAge();
         }
 
-        [TestCase(2020)]
-        [TestCase(2021)]
+        [TestCase(1970)]
+        [TestCase(1950)]
         [TestCase(1999)]
         [TestCase(1989)]
         public void Is_year_valid_on_selection_of_date_of_birth(int year)

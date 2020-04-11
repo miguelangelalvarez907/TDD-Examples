@@ -20,7 +20,7 @@ namespace Lotto.Age.Units
         [TestCase("Bobb")]
         [TestCase("Kiran")]
         [TestCase("123456789")]
-        public void Is_User_name_less_than_9_in_length(string name)
+        public void Is_user_name_less_than_9_in_length(string name)
         {
             var result = _user.ValidateName(name);
 

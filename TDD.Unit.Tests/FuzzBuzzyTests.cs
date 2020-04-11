@@ -22,7 +22,7 @@ namespace TDD.Unit.Tests
         [TestCase("FizzBuzz", 15)]
         [TestCase("FizzBuzz", 30)]
         [TestCase("", 7)]
-        public void TestFizzBuzz(string expected, int number)
+        public void Test_fizz_buzz_retutns_correct_string(string expected, int number)
         {
             Assert.AreEqual(expected, fizzy.FizzBuzzy(number));
         }
