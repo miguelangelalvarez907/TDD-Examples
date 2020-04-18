@@ -7,5 +7,7 @@ namespace TDD.Examples.MoqDatabase
         bool Save(OrderModel value);
 
         OrderModel FindOne(int orderNumber);
+
+        OrderModel FindOne(OrderModel orderModel);
     }
 }

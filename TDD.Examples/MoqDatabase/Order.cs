@@ -25,6 +25,11 @@ namespace TDD.Examples.MoqDatabase
             return _collection.Find(x => x.Number == orderNumber).First();
         }
 
+        public OrderModel FindOne(OrderModel orderModel)
+        {
+            return _collection.Find(x => x.Number == orderModel.Number && x.Text == orderModel.Text).First();
+        }
+
         public bool Save(OrderModel value)
         {
             try

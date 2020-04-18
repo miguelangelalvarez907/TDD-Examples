@@ -8,7 +8,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace TDD.Examples.MoqDatabase
 {
-    public class OrderModel
+    public class OrderModel : IOrderModel
     {
         public OrderModel()
         {
@@ -21,5 +21,11 @@ namespace TDD.Examples.MoqDatabase
         public int Number { get; set; }
         public string Type { get; set; }
         public DateTime DateCreated { get; set; }
+    }
+
+    public interface IOrderModel
+    {
+         string Text { get;}
+         int Number { get; }
     }
 }

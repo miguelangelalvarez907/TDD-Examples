@@ -24,5 +24,16 @@ namespace TDD.Examples.MoqDatabase
 
             return "NO";
         }
+        public string ProcessOrder(OrderModel orderModel)
+        {
+            var getOrder = _order.FindOne(orderModel);
+
+            if (getOrder.Number <= 5 && getOrder.Text == "test".ToLower())
+            {
+                return "OK";
+            }
+
+            return "NO";
+        }
     }
 }

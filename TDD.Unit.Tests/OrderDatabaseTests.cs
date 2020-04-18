@@ -13,26 +13,42 @@ namespace TDD.Unit.Tests
     class OrderDatabaseTests
     {
         private Mock<IOrder> _orderDatabase;
-        //private Mock<OrderModel> _orderModel;
         private OrderService _orderService;
+
+        [SetUp]
+        public void Setup()
+        {
+            _orderDatabase = new Mock<IOrder>();
+        } 
+
 
         [TestCase(1, "OK")]
         [TestCase(2, "OK")]
         [TestCase(550, "NO")]
         public void Check_order_number_with_a_OK_response(int orderNumber, string expectedResult)
-        {
-            _orderDatabase = new Mock<IOrder>();
-
-            //_orderModel = new Mock<OrderModel>();
-            //_orderModel.Setup(s => s.Number).Returns(orderNumber);
-            //_orderModel.SetupAllProperties();
-
+        {     
             _orderDatabase.Setup(p => p.FindOne(orderNumber))
                 .Returns(new OrderModel { Number = orderNumber, Text = "Test", DateCreated = DateTime.Now, Type = "Box" });
 
             _orderService = new OrderService(_orderDatabase.Object);
 
             var result = _orderService.ProcessOrder(orderNumber);
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        [TestCase(1,"test", "OK")]
+        [TestCase(1, "bob", "NO")]
+        public void Check_order_number_using_a_model_as_param(int orderNumber,string text, string expectedResult)
+        {
+            var _orderModel = Mock.Of<OrderModel>(x => x.Text == text && x.Number == 1);
+
+            _orderDatabase.Setup(p => p.FindOne(_orderModel))
+                .Returns(new OrderModel { Number = orderNumber, Text = text, DateCreated = DateTime.Now, Type = "Box" });
+
+            _orderService = new OrderService(_orderDatabase.Object);
+
+            var result = _orderService.ProcessOrder(_orderModel);
 
             Assert.That(result, Is.EqualTo(expectedResult));
         }
