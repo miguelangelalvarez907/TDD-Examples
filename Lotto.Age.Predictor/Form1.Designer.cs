@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblName = new System.Windows.Forms.Label();
-            this.lbldob = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
             this.mnCalDob = new System.Windows.Forms.MonthCalendar();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.lbldob = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -50,14 +50,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "User Details";
             // 
-            // lblName
+            // mnCalDob
             // 
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(23, 39);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(35, 13);
-            this.lblName.TabIndex = 0;
-            this.lblName.Text = "Name";
+            this.mnCalDob.Location = new System.Drawing.Point(150, 73);
+            this.mnCalDob.Name = "mnCalDob";
+            this.mnCalDob.TabIndex = 3;
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(150, 39);
+            this.txtName.MaxLength = 10;
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(227, 20);
+            this.txtName.TabIndex = 2;
             // 
             // lbldob
             // 
@@ -68,19 +73,14 @@
             this.lbldob.TabIndex = 1;
             this.lbldob.Text = "Date of Birth";
             // 
-            // txtName
+            // lblName
             // 
-            this.txtName.Location = new System.Drawing.Point(150, 39);
-            this.txtName.MaxLength = 10;
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(227, 20);
-            this.txtName.TabIndex = 2;
-            // 
-            // mnCalDob
-            // 
-            this.mnCalDob.Location = new System.Drawing.Point(150, 73);
-            this.mnCalDob.Name = "mnCalDob";
-            this.mnCalDob.TabIndex = 3;
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(23, 39);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(35, 13);
+            this.lblName.TabIndex = 0;
+            this.lblName.Text = "Name";
             // 
             // btnSubmit
             // 
@@ -90,6 +90,7 @@
             this.btnSubmit.TabIndex = 1;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = true;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // Form1
             // 
