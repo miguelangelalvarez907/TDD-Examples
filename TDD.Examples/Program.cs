@@ -1,4 +1,5 @@
 ﻿using System;
+using TDD.Examples.MoqDatabase;
 
 namespace TDD.Examples
 {
@@ -6,7 +7,12 @@ namespace TDD.Examples
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var order = new Order();
+
+            order.Save(new OrderModel { Number = 1, Text = "Test", Type = "Box" });
+
+            var get = order.FindOne(1);
+
         }
     }
 }
