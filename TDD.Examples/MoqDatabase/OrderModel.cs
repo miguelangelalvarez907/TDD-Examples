@@ -21,6 +21,7 @@ namespace TDD.Examples.MoqDatabase
         public int Number { get; set; }
         public string Type { get; set; }
         public DateTime DateCreated { get; set; }
+        public Dictionary<string, object> DynamicObj { get; set; }
     }
 
     public interface IOrderModel

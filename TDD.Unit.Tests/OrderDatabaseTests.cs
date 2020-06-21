@@ -41,7 +41,7 @@ namespace TDD.Unit.Tests
         [TestCase(1, "bob", "NO")]
         public void Check_order_number_using_a_model_as_param(int orderNumber,string text, string expectedResult)
         {
-            var _orderModel = Mock.Of<OrderModel>(x => x.Text == text && x.Number == 1);
+            var _orderModel = Mock.Of<OrderModel>(x => x.Text == text && x.Number == orderNumber);
 
             _orderDatabase.Setup(p => p.FindOne(_orderModel))
                 .Returns(new OrderModel { Number = orderNumber, Text = text, DateCreated = DateTime.Now, Type = "Box" });

@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace TDD.Examples.MoqDatabase
@@ -37,10 +38,11 @@ namespace TDD.Examples.MoqDatabase
                 _collection.InsertOne(value);
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw;
             }
         }
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
 using TDD.Examples.MoqDatabase;
 
 namespace TDD.Examples
@@ -8,11 +10,18 @@ namespace TDD.Examples
         static void Main(string[] args)
         {
             var order = new Order();
+            Random rand = new Random();
 
-            order.Save(new OrderModel { Number = 1, Text = "Test", Type = "Box" });
+            var get = order.FindOne(114519930);
+            var obj = get.DynamicObj["types"];
 
-            var get = order.FindOne(1);
+            var dict = new Dictionary<string, object>();
+            dict.Add("target", 1);
+            dict.Add("jeff", "3");
+            dict.Add("types", new List<string> { "a", "b" });
 
+
+            order.Save(new OrderModel { Number = rand.Next(), Text = "Test", Type = "Box", DynamicObj = dict });
         }
     }
 }
