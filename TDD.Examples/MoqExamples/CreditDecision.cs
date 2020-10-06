@@ -15,7 +15,14 @@ namespace TDD.Examples.MoqExamples
 
         public string MakeCreditDecision(int creditScore)
         {
-            return _creditScoreService.MakeCreditDecision(creditScore);
+            var decision = _creditScoreService.MakeCreditDecision(creditScore).ToLower();
+
+            if (decision == "declined" || decision == "maybe")
+            {
+                return "Nah";
+            }
+
+            return "Good";
         }
     }
 }
