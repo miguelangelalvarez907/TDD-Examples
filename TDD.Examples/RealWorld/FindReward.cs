@@ -8,7 +8,7 @@ namespace TDD.Examples.RealWorld
     {
         public string GuessReward(int rewardValue)
         {
-            throw new NotImplementedException();
+            return "FreeCoins";
         }
     }
 }
