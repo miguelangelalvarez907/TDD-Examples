@@ -12,6 +12,7 @@ namespace NUnitTests.Foo
         bool TryParse(string value, out string outputvalue);
         bool Submit(ref Bar bar);
         int GetCount();
+        bool Add(int amount);
         string name { get; set; }
         IBaz SomeBaz { get; }
         int SomeOtherProperty { get; set; }
