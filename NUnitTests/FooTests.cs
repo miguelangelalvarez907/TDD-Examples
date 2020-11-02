@@ -129,7 +129,7 @@ namespace NUnitTests
             {
                 Assert.That(_fooMock.Object.Name, Is.EqualTo("bar"));
                 Assert.That(_fooMock.Object.SomeBaz.Name, Is.EqualTo("hello"));
-            });        
+            });
         }
 
         [Test]
@@ -151,6 +151,21 @@ namespace NUnitTests
             {
                 foo.Name = "bob";
             }, Times.AtLeastOnce);
+        }
+
+        [Test]
+        public void Test_Stub_A_Propery()
+        {
+            _fooMock.SetupProperty(f => f.Name);
+            _fooMock.SetupAllProperties();
+
+            IFoo foo = _fooMock.Object;
+
+            foo.Name = "abc";
+            Assert.That(_fooMock.Object.Name, Is.EqualTo("abc"));
+
+            foo.SomeOtherProperty = 123;
+            Assert.That(_fooMock.Object.SomeOtherProperty, Is.EqualTo(123));
         }
     }
 }
