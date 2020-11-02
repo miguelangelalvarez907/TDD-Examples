@@ -3,6 +3,7 @@ using NUnit.Framework;
 using NUnitTests.Foo;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace NUnitTests
@@ -82,6 +83,38 @@ namespace NUnitTests
                 Assert.That(_fooMock.Object.Submit(ref bar), Is.EqualTo(true));
                 Assert.IsFalse(_fooMock.Object.Submit(ref barTwo));
             });
+        }
+
+        [Test]
+        public void Test_String_Argurments()
+        {
+            _fooMock.Setup(foo => foo.ProcessString(It.IsAny<string>())).Returns((string s) => s.ToLowerInvariant());
+
+            Assert.That(_fooMock.Object.ProcessString("ABC"), Is.EqualTo("abc"));
+        }
+
+        [Test]
+        public void Test_CallBack_Argurments()
+        {
+            var countCall = 0;
+
+            _fooMock.Setup(foo => foo.GetCount()).Returns(() => countCall).Callback(() => ++countCall); ;
+
+            _fooMock.Object.GetCount();
+            _fooMock.Object.GetCount();
+
+            Assert.That(_fooMock.Object.GetCount(), Is.EqualTo(2));
+        }
+
+        [Test]
+        public void Test_Exceptions_Argurments()
+        {
+            _fooMock.Setup(foo => foo.DoSomething("null")).Throws(new ArgumentException("cmd"));
+
+            Assert.Throws<ArgumentException>(() =>
+            {
+                _fooMock.Object.DoSomething("null");
+            }, "cmd");
         }
     }
 }
