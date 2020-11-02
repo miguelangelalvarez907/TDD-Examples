@@ -12,6 +12,7 @@ namespace NUnitTests
     public class FooTests
     {
         private Mock<IFoo> _fooMock;
+        private Mock<IAnimal> _animalMock;
         public FooTests()
         {
 
@@ -166,6 +167,33 @@ namespace NUnitTests
 
             foo.SomeOtherProperty = 123;
             Assert.That(_fooMock.Object.SomeOtherProperty, Is.EqualTo(123));
+        }
+
+        [Test]
+        public void Test_Events()
+        {
+            _animalMock = new Mock<IAnimal>();
+            var doctor = new Doctor(_animalMock.Object);
+
+            _animalMock.Raise(a => a.FallsIll += null, new EventArgs());
+
+            Assert.That(doctor.TimesCured, Is.EqualTo(1));
+
+            _animalMock.Setup(a => a.Stumble()).Raises(a => a.FallsIll += null, new EventArgs());
+
+            _animalMock.Object.Stumble();
+
+            Assert.That(doctor.TimesCured, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void Test_Method_With_Verify()
+        {
+            var consumer = new Consumer(_fooMock.Object);
+
+            consumer.Hello();
+
+            _fooMock.Verify(Foo => Foo.DoSomething("ping"), Times.AtLeastOnce);
         }
     }
 }
