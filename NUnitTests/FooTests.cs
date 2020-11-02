@@ -116,5 +116,41 @@ namespace NUnitTests
                 _fooMock.Object.DoSomething("null");
             }, "cmd");
         }
+
+        [Test]
+        public void Test_Property_Values()
+        {
+            _fooMock.Setup(foo => foo.Name).Returns("bar");
+            _fooMock.Setup(foo => foo.SomeBaz.Name).Returns("hello");
+
+            _fooMock.Object.Name = "This will not work??";
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(_fooMock.Object.Name, Is.EqualTo("bar"));
+                Assert.That(_fooMock.Object.SomeBaz.Name, Is.EqualTo("hello"));
+            });        
+        }
+
+        [Test]
+        public void Test_Property_Values_That_Is_Set()
+        {
+            bool setterCalled = false;
+
+            _fooMock.SetupSet(foo =>
+            {
+                foo.Name = It.IsAny<string>();
+            }).Callback<string>(value =>
+            {
+                setterCalled = true;
+            });
+
+            _fooMock.Object.Name = "bob";
+
+            _fooMock.VerifySet(foo =>
+            {
+                foo.Name = "bob";
+            }, Times.AtLeastOnce);
+        }
     }
 }

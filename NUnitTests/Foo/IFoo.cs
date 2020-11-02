@@ -13,7 +13,7 @@ namespace NUnitTests.Foo
         bool Submit(ref Bar bar);
         int GetCount();
         bool Add(int amount);
-        string name { get; set; }
+        string Name { get; set; }
         IBaz SomeBaz { get; }
         int SomeOtherProperty { get; set; }
     }
