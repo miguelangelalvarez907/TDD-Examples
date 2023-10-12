@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
 using NUnitTests.BankAccount;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NUnitTests
 {
@@ -18,16 +16,8 @@ namespace NUnitTests
         }
 
         [Test]
-        public void BankAccount_Should_Increase_On_Postive_Deposit()
+        public void BankAccount_debe_arrojar_una_excepcion_por_numero_negativo()
         {
-            _myBankAccount.Deposit(100);
-
-            Assert.That(_myBankAccount.Balance, Is.EqualTo(200));
-        }
-
-        [Test]
-        public void BankAccount_Should_Throw_An_Exception_On_Negative_Number()
-         {
             var ex = Assert.Throws<ArgumentException>(() =>
             {
                 _myBankAccount.Deposit(-1);
@@ -35,5 +25,15 @@ namespace NUnitTests
 
             StringAssert.StartsWith("Deposit amount must be positive", ex.Message);
         }
+
+        [Test]
+        public void BankAccount_debe_incrementar_en_100()
+        {
+            _myBankAccount.Deposit(100);
+
+            Assert.That(_myBankAccount.Balance, Is.EqualTo(200));
+        }
+
+        
     }
 }

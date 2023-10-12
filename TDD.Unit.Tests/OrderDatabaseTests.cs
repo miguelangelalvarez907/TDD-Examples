@@ -27,13 +27,16 @@ namespace TDD.Unit.Tests
         [TestCase(550, "NO")]
         public void Check_order_number_with_a_OK_response(int orderNumber, string expectedResult)
         {     
+            // arrange
             _orderDatabase.Setup(p => p.FindOne(orderNumber))
                 .Returns(new OrderModel { Number = orderNumber, Text = "Test", DateCreated = DateTime.Now, Type = "Box" });
 
             _orderService = new OrderService(_orderDatabase.Object);
 
+            // action
             var result = _orderService.ProcessOrder(orderNumber);
 
+            // assert
             Assert.That(result, Is.EqualTo(expectedResult));
         }
 
@@ -41,15 +44,16 @@ namespace TDD.Unit.Tests
         [TestCase(1, "bob", "NO")]
         public void Check_order_number_using_a_model_as_param(int orderNumber,string text, string expectedResult)
         {
+            // arrange
             var _orderModel = Mock.Of<OrderModel>(x => x.Text == text && x.Number == orderNumber);
 
             _orderDatabase.Setup(p => p.FindOne(_orderModel))
                 .Returns(new OrderModel { Number = orderNumber, Text = text, DateCreated = DateTime.Now, Type = "Box" });
-
+            // action
             _orderService = new OrderService(_orderDatabase.Object);
-
             var result = _orderService.ProcessOrder(_orderModel);
 
+            //assert
             Assert.That(result, Is.EqualTo(expectedResult));
         }
     }

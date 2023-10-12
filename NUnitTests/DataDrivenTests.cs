@@ -21,6 +21,9 @@ namespace NUnitTests
         [TestCase(50, true, 50)]
         [TestCase(100, true, 0)]
         [TestCase(1000, false, 100)]
+        [TestCase(101, false, 100)]
+        [TestCase(99, true, 1)]
+        [TestCase(90, true, 10)]
         public void Test_Multiple_Withdraws(int amountToWithdraw, bool shouldSucceed, int expectedBalance)
         {
             var result = _mybankAccount.WithDraw(amountToWithdraw);
